@@ -3,6 +3,7 @@ package com.example.composebottomnavexample.presentation.main
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.composebottomnavexample.presentation.navigation.BottomNavigationMenu
 import com.example.composebottomnavexample.presentation.navigation.Navigation
 
@@ -10,9 +11,8 @@ import com.example.composebottomnavexample.presentation.navigation.Navigation
 fun MainScreen(navController: NavHostController) {
     Scaffold(bottomBar = {
         BottomNavigationMenu(
-            navController = navController,
-            onItemClick = { navController.navigate(it.route) }
-        )
+            navState = navController.currentBackStackEntryAsState()
+        ) { navController.navigate(it.route) }
     }) {
         Navigation(navHostController = navController)
     }
